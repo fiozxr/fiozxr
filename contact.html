@@ -6,188 +6,244 @@
     <title>FIOZXR | Contact</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        /* [COPY CORE CSS] */
-        :root { --bg: #030303; --fg: #dcdcdc; --muted: #666666; --border: #1a1a1a; --hover: #222222; --font-head: 'Cinzel', serif; --font-body: 'Inter', sans-serif; }
-        * { box-sizing: border-box; margin: 0; padding: 0; cursor: none; }
-        body { background-color: var(--bg); color: var(--fg); font-family: var(--font-body); overflow-x: hidden; line-height: 1.5; -webkit-font-smoothing: antialiased; }
-        #cursor { position: fixed; top: 0; left: 0; width: 20px; height: 20px; border: 1px solid var(--fg); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background-color 0.3s; mix-blend-mode: difference; }
-        #cursor.hover { width: 50px; height: 50px; background-color: var(--fg); border-color: transparent; }
-        #cursor-dot { position: fixed; top: 0; left: 0; width: 4px; height: 4px; background-color: var(--fg); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
-        .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9998; opacity: 0.04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
-        .grid-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: -1; background-size: 50px 50px; background-image: linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px); opacity: 0.3; }
-        .loader { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--bg); z-index: 10000; display: flex; justify-content: center; align-items: center; transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1); }
-        .loader.hide { transform: translateY(-100%); }
-        .loader-text { font-family: var(--font-head); font-size: 2rem; letter-spacing: 0.5em; overflow: hidden; }
-        .loader-text span { display: inline-block; transform: translateY(100%); animation: revealUp 1s forwards; }
-        @keyframes revealUp { to { transform: translateY(0); } }
-        h1, h2, h3 { font-family: var(--font-head); font-weight: 400; text-transform: uppercase; }
-        a { color: var(--fg); text-decoration: none; position: relative; }
-        .arch-container { display: grid; grid-template-columns: 80px 1fr 80px; min-height: 100vh; border-left: 1px solid var(--border); border-right: 1px solid var(--border); margin: 0 auto; max-width: 1400px; }
-        header { grid-column: 2; display: flex; justify-content: space-between; align-items: center; padding: 2rem 0; border-bottom: 1px solid var(--border); }
-        .logo { font-family: var(--font-head); font-size: 1.5rem; letter-spacing: 0.2em; }
-        nav { display: flex; gap: 3rem; }
-        nav a { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
-        nav a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -4px; left: 0; background-color: var(--fg); transition: width 0.3s ease; }
-        nav a:hover::after, nav a.active::after { width: 100%; }
-        footer { grid-column: 2; padding: 4rem 0; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
-        .hover-target { display: inline-block; }
-        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s, transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* Shared variables and core styles */
+        :root {
+            --bg-primary: #0a0e17; --bg-secondary: #121826; --text-main: #f0f4f8; --text-muted: #9ba7b6;
+            --accent-primary: #3b82f6; --accent-glow: rgba(59, 130, 246, 0.5);
+            --glass-bg: rgba(255, 255, 255, 0.03); --glass-border: rgba(255, 255, 255, 0.08);
+            --font-head: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+        }
 
-        /* --- CONTACT ARCHITECTURE --- */
-        .contact-grid {
-            grid-column: 2;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-primary); color: var(--text-main); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; background-image: radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%), radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%); background-attachment: fixed; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+        nav { position: fixed; top: 0; left: 0; right: 0; padding: 1rem 0; z-index: 100; background: rgba(10, 14, 23, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--glass-border); }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; text-decoration: none; color: var(--text-main); letter-spacing: -0.5px; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent-primary); }
+
+        .mobile-toggle { display: none; background: none; border: none; color: var(--text-main); font-size: 1.5rem; cursor: pointer; }
+        @media (max-width: 768px) {
+            .mobile-toggle { display: block; }
+            .nav-links { position: fixed; top: 60px; left: 0; right: 0; background: var(--bg-secondary); flex-direction: column; gap: 1.5rem; padding: 2rem; border-bottom: 1px solid var(--glass-border); transform: translateY(-150%); transition: transform 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+            .nav-links.open { transform: translateY(0); }
+        }
+        footer { border-top: 1px solid var(--glass-border); padding: 3rem 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 4rem; }
+
+        .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* Contact Specific */
+        .contact-section {
+            padding: 8rem 0 4rem 0;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            min-height: 70vh;
+            gap: 4rem;
+            align-items: flex-start;
         }
-        @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
 
-        .contact-info {
-            padding: 8rem 4rem 4rem 0;
-            border-right: 1px solid var(--border);
-            display: flex; flex-direction: column;
+        @media (max-width: 900px) {
+            .contact-section { grid-template-columns: 1fr; gap: 3rem; }
         }
-        @media (max-width: 900px) { .contact-info { border-right: none; border-bottom: 1px solid var(--border); padding: 4rem 0; } }
 
-        .contact-info h1 { font-size: clamp(3rem, 5vw, 4rem); margin-bottom: 2rem; letter-spacing: -0.02em; }
-        .contact-info p { color: var(--muted); font-weight: 300; margin-bottom: 4rem; max-width: 400px; }
-
-        .social-links { display: flex; flex-direction: column; gap: 2rem; }
-        .social-link {
-            font-family: var(--font-head); font-size: 1.5rem; letter-spacing: 0.1em;
-            display: flex; align-items: center; gap: 1rem;
-            transition: transform 0.3s;
+        .contact-info h1 {
+            font-family: var(--font-head);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
         }
-        .social-link::before { content: ''; display: block; width: 20px; height: 1px; background: var(--muted); transition: width 0.3s; }
-        .social-link:hover { transform: translateX(10px); }
-        .social-link:hover::before { width: 40px; background: var(--fg); }
 
-        .contact-form-wrapper {
-            padding: 8rem 0 4rem 4rem;
+        .contact-info p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            max-width: 500px;
         }
-        @media (max-width: 900px) { .contact-form-wrapper { padding: 4rem 0; } }
 
-        form { display: flex; flex-direction: column; gap: 3rem; }
-        
-        .input-group { position: relative; }
-        .input-group input, .input-group textarea {
+        .social-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .social-card {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: transform 0.2s, border-color 0.2s, background 0.2s;
+        }
+
+        .social-card:hover {
+            transform: translateX(10px);
+            border-color: rgba(59, 130, 246, 0.4);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .social-card-icon {
+            font-size: 1.5rem;
+            margin-right: 1.5rem;
+        }
+
+        .social-card-text {
+            font-family: var(--font-head);
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        /* Form styling optimized for desktop and mobile */
+        .contact-form {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            border-radius: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .form-control {
             width: 100%;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 0;
-            color: var(--fg);
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 1rem;
+            color: var(--text-main);
             font-family: var(--font-body);
             font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-control:focus {
             outline: none;
-            transition: border-color 0.3s;
-        }
-        .input-group textarea { resize: none; height: 100px; }
-        .input-group label {
-            position: absolute; left: 0; top: 1rem;
-            color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;
-            transition: top 0.3s, font-size 0.3s, color 0.3s;
-            pointer-events: none;
-        }
-        .input-group input:focus, .input-group textarea:focus { border-color: var(--fg); }
-        .input-group input:focus ~ label, .input-group textarea:focus ~ label,
-        .input-group input:valid ~ label, .input-group textarea:valid ~ label {
-            top: -1.5rem; font-size: 0.7rem; color: var(--fg);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
-        .submit-btn {
-            background: transparent; border: 1px solid var(--border);
-            color: var(--fg); font-family: var(--font-head);
-            font-size: 1.2rem; letter-spacing: 0.2em; text-transform: uppercase;
-            padding: 1.5rem 0; width: 100%;
-            transition: background 0.3s, color 0.3s;
-            margin-top: 2rem;
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
         }
-        .submit-btn:hover { background: var(--fg); color: var(--bg); }
 
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent-primary);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-head);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        /* Ensure touch targets are large enough on mobile */
+        @media (max-width: 768px) {
+            .form-control, .btn-submit, .social-card { padding: 1.25rem; }
+        }
     </style>
 </head>
 <body>
-    <div class="loader" id="loader">
-        <div class="loader-text"><span>ESTABLISH_UPLINK</span></div>
-    </div>
 
-    <div class="noise"></div>
-    <div class="grid-overlay"></div>
+    <nav>
+        <div class="container nav-content">
+            <a href="index.html" class="logo">FIOZXR</a>
+            <button class="mobile-toggle" id="mobile-toggle">☰</button>
+            <div class="nav-links" id="nav-links">
+                <a href="projects.html">Projects</a>
+                <a href="contact.html" class="active">Contact</a>
+            </div>
+        </div>
+    </nav>
 
-    <div id="cursor"></div>
-    <div id="cursor-dot"></div>
+    <div class="container">
+        <section class="contact-section">
 
-    <div class="arch-container">
-        <header>
-            <a href="index.html" class="logo hover-target">FIOZXR</a>
-            <nav>
-                <a href="projects.html" class="hover-target">Projects</a>
-                <a href="contact.html" class="active hover-target">Contact</a>
-            </nav>
-        </header>
-
-        <section class="contact-grid">
-            <div class="contact-info reveal">
-                <h1>COMM_LINK.</h1>
-                <p>Initiate contact for architectural security design, system analysis, or deployment collaborations.</p>
+            <div class="contact-info fade-up">
+                <h1>Initiate Protocol</h1>
+                <p>Available for freelance engagements, system auditing, and open-source collaborations. Use the secure form or direct channels below.</p>
                 
-                <div class="social-links">
-                    <a href="mailto:fiozxrrahman@duck.com" class="social-link hover-target">EMAIL</a>
-                    <a href="https://github.com/fiozxr" class="social-link hover-target">GITHUB</a>
-                    <a href="https://instagram.com/fiozxr_" class="social-link hover-target">INSTAGRAM</a>
+                <div class="social-cards">
+                    <a href="mailto:fiozxrrahman@duck.com" class="social-card">
+                        <span class="social-card-icon">✉️</span>
+                        <span class="social-card-text">fiozxrrahman@duck.com</span>
+                    </a>
+                    <a href="https://github.com/fiozxr" class="social-card">
+                        <span class="social-card-icon">🐙</span>
+                        <span class="social-card-text">GitHub Profile</span>
+                    </a>
+                    <a href="https://x.com/fiozxr" class="social-card">
+                        <span class="social-card-icon">🐦</span>
+                        <span class="social-card-text">Twitter / X</span>
+                    </a>
                 </div>
             </div>
 
-            <div class="contact-form-wrapper reveal" style="transition-delay: 0.2s;">
-                <form>
-                    <div class="input-group">
-                        <input type="text" id="name" required class="hover-target">
-                        <label for="name">IDENTIFIER (NAME)</label>
+            <div class="contact-form-container fade-up" style="transition-delay: 0.2s;">
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Identifier (Name)</label>
+                        <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
                     </div>
-                    <div class="input-group">
-                        <input type="email" id="email" required class="hover-target">
-                        <label for="email">TRANSMISSION_NODE (EMAIL)</label>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Transmission Node (Email)</label>
+                        <input type="email" id="email" class="form-control" placeholder="your@email.com" required>
                     </div>
-                    <div class="input-group">
-                        <textarea id="message" required class="hover-target"></textarea>
-                        <label for="message">DATA_PAYLOAD (MESSAGE)</label>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">Data Payload (Message)</label>
+                        <textarea id="message" class="form-control" placeholder="How can I assist you?" required></textarea>
                     </div>
-                    <button type="button" class="submit-btn hover-target">TRANSMIT</button>
+
+                    <button type="button" class="btn-submit">Transmit Message</button>
                 </form>
             </div>
+
         </section>
 
-        <footer style="border-top: 1px solid var(--border);">
-            <span>&copy; 2026 FIOZXR</span>
-            <span>SYSTEM_STATUS: ONLINE</span>
-            <span>NO RIGHTS RESERVED</span>
+        <footer>
+            <p>&copy; 2026 FIOZXR. Professional Security Portfolio.</p>
         </footer>
     </div>
 
     <script>
-        // Custom Cursor
-        const cursor = document.getElementById('cursor');
-        const cursorDot = document.getElementById('cursor-dot');
-        let mouseX = 0, mouseY = 0; let cursorX = 0, cursorY = 0;
-        document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; cursorDot.style.left = mouseX + 'px'; cursorDot.style.top = mouseY + 'px'; });
-        function animateCursor() { cursorX += (mouseX - cursorX) * 0.2; cursorY += (mouseY - cursorY) * 0.2; cursor.style.left = cursorX + 'px'; cursor.style.top = cursorY + 'px'; requestAnimationFrame(animateCursor); }
-        animateCursor();
-        document.querySelectorAll('.hover-target, a, button, input, textarea').forEach(target => {
-            target.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-            target.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
+        const toggle = document.getElementById('mobile-toggle');
+        const nav = document.getElementById('nav-links');
+        toggle.addEventListener('click', () => { nav.classList.toggle('open'); toggle.textContent = nav.classList.contains('open') ? '✕' : '☰'; });
 
-        // Loader
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hide');
-                document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
-            }, 800);
-        });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
