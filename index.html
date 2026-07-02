@@ -3,355 +3,344 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F I O Z X R</title>
+    <title>FIOZXR | Cybersecurity</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #030303;
-            --fg: #dcdcdc;
-            --muted: #666666;
-            --border: #1a1a1a;
-            --hover: #222222;
-            --font-head: 'Cinzel', serif;
+            --bg-primary: #0a0e17;
+            --bg-secondary: #121826;
+            --text-main: #f0f4f8;
+            --text-muted: #9ba7b6;
+            --accent-primary: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.5);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+
+            --font-head: 'Space Grotesk', sans-serif;
             --font-body: 'Inter', sans-serif;
         }
 
         * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            cursor: none; /* Custom cursor */
+            margin: 0; padding: 0; box-sizing: border-box;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--fg);
+            background-color: var(--bg-primary);
+            color: var(--text-main);
             font-family: var(--font-body);
-            overflow-x: hidden;
-            line-height: 1.5;
+            line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
+            background-attachment: fixed;
         }
 
-        /* --- CUSTOM CURSOR --- */
-        #cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 20px;
-            height: 20px;
-            border: 1px solid var(--fg);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s, background-color 0.3s;
-            mix-blend-mode: difference;
-        }
-        #cursor.hover {
-            width: 50px;
-            height: 50px;
-            background-color: var(--fg);
-            border-color: transparent;
-        }
-        #cursor-dot {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 4px;
-            background-color: var(--fg);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-        }
-
-        /* --- NOISE GRAIN --- */
-        .noise {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 9998; opacity: 0.04;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-
-        /* --- GRID OVERLAY --- */
-        .grid-overlay {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: -1;
-            background-size: 50px 50px;
-            background-image: linear-gradient(to right, var(--border) 1px, transparent 1px),
-                              linear-gradient(to bottom, var(--border) 1px, transparent 1px);
-            opacity: 0.3;
-        }
-
-        /* --- LOADER --- */
-        .loader {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: var(--bg); z-index: 10000;
-            display: flex; justify-content: center; align-items: center;
-            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
-        }
-        .loader.hide { transform: translateY(-100%); }
-        .loader-text { font-family: var(--font-head); font-size: 2rem; letter-spacing: 0.5em; overflow: hidden; }
-        .loader-text span { display: inline-block; transform: translateY(100%); animation: revealUp 1s forwards; }
-
-        @keyframes revealUp { to { transform: translateY(0); } }
-
-        /* --- TYPOGRAPHY --- */
-        h1, h2, h3 { font-family: var(--font-head); font-weight: 400; text-transform: uppercase; }
-        a { color: var(--fg); text-decoration: none; position: relative; }
-
-        /* --- LAYOUT ARCHITECTURE --- */
-        .arch-container {
-            display: grid;
-            grid-template-columns: 80px 1fr 80px;
-            min-height: 100vh;
-            border-left: 1px solid var(--border);
-            border-right: 1px solid var(--border);
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
-            max-width: 1400px;
+            padding: 0 1.5rem;
         }
 
-        /* --- NAV --- */
-        header {
-            grid-column: 2;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 2rem 0;
-            border-bottom: 1px solid var(--border);
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            padding: 1rem 0;
+            z-index: 100;
+            background: rgba(10, 14, 23, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
         }
-        .logo { font-family: var(--font-head); font-size: 1.5rem; letter-spacing: 0.2em; }
-        nav { display: flex; gap: 3rem; }
-        nav a { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
-        nav a::after {
-            content: ''; position: absolute; width: 0; height: 1px;
-            bottom: -4px; left: 0; background-color: var(--fg);
-            transition: width 0.3s ease;
-        }
-        nav a:hover::after, nav a.active::after { width: 100%; }
 
-        /* --- HERO --- */
-        .hero {
-            grid-column: 2;
-            padding: 10rem 0;
-            display: flex; flex-direction: column; justify-content: center;
-            border-bottom: 1px solid var(--border);
-            position: relative;
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 7rem);
-            line-height: 1;
-            letter-spacing: -0.02em;
-            margin-bottom: 2rem;
-            overflow: hidden;
-        }
-        .hero h1 .line {
-            display: block; overflow: hidden;
-        }
-        .hero h1 .line span {
-            display: inline-block;
-            transform: translateY(110%);
-            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .hero h1.visible .line span { transform: translateY(0); }
-        
-        .hero-desc {
-            font-size: 1rem; color: var(--muted); max-width: 500px;
-            font-weight: 300; letter-spacing: 0.05em;
-            opacity: 0; transform: translateY(20px);
-            transition: opacity 1s 0.5s, transform 1s 0.5s;
-        }
-        .hero-desc.visible { opacity: 1; transform: translateY(0); }
 
-        /* --- MARQUEE --- */
-        .marquee {
-            grid-column: 1 / -1;
-            padding: 2rem 0;
-            border-bottom: 1px solid var(--border);
-            overflow: hidden;
-            white-space: nowrap;
-            background: #080808;
-        }
-        .marquee-content {
-            display: inline-block;
-            animation: marquee 20s linear infinite;
+        .logo {
             font-family: var(--font-head);
             font-size: 1.5rem;
-            letter-spacing: 0.2em;
-            color: var(--muted);
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
         }
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* --- ARCHITECTURAL GRID SECTIONS --- */
-        .section-grid {
-            grid-column: 2;
-            display: grid; grid-template-columns: 1fr 1fr;
-            border-bottom: 1px solid var(--border);
+        .nav-links {
+            display: flex; gap: 2rem;
         }
-        @media (max-width: 768px) { .section-grid { grid-template-columns: 1fr; } }
 
-        .grid-cell {
-            padding: 4rem;
-            border-right: 1px solid var(--border);
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-primary);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            display: none;
+            background: none; border: none;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-toggle { display: block; }
+            .nav-links {
+                position: fixed; top: 60px; left: 0; right: 0;
+                background: var(--bg-secondary);
+                flex-direction: column; gap: 1.5rem;
+                padding: 2rem;
+                border-bottom: 1px solid var(--glass-border);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            }
+            .nav-links.open { transform: translateY(0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex; align-items: center;
+            padding-top: 80px; /* Offset for nav */
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-primary);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-head);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent-primary);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 14px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--accent-glow);
+            background: #2563eb;
+        }
+
+        /* Features/About Section */
+        .section-padding { padding: 6rem 0; }
+
+        .section-title {
+            font-family: var(--font-head);
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 2.5rem;
+            border-radius: 16px;
+            transition: transform 0.3s, border-color 0.3s;
             position: relative;
             overflow: hidden;
         }
-        .grid-cell:last-child { border-right: none; }
-        @media (max-width: 768px) { .grid-cell { border-right: none; border-bottom: 1px solid var(--border); } }
 
-        .cell-number {
-            position: absolute; top: 2rem; right: 2rem;
-            font-family: var(--font-head); color: var(--border);
-            font-size: 4rem; line-height: 1; z-index: -1;
+        .feature-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            opacity: 0; transition: opacity 0.3s;
         }
-        .grid-cell h3 { font-size: 2rem; margin-bottom: 1.5rem; letter-spacing: 0.1em; }
-        .grid-cell p { color: var(--muted); font-size: 0.95rem; font-weight: 300; margin-bottom: 2rem; }
 
-        .tags { display: flex; flex-wrap: wrap; gap: 1rem; }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.15);
+        }
+        .feature-card:hover::before { opacity: 1; }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-primary);
+        }
+
+        .feature-card h3 {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
         .tag {
-            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
-            padding: 0.5rem 1rem; border: 1px solid var(--border);
-            transition: background 0.3s;
+            background: rgba(255,255,255,0.05);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: var(--text-main);
+            border: 1px solid var(--glass-border);
         }
-        .tag:hover { background: var(--fg); color: var(--bg); }
 
-        /* --- ANIMATIONS --- */
-        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s, transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        /* --- FOOTER --- */
+        /* Footer */
         footer {
-            grid-column: 2;
-            padding: 4rem 0;
-            display: flex; justify-content: space-between; align-items: center;
-            font-size: 0.8rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase;
+            border-top: 1px solid var(--glass-border);
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
         }
 
-        /* Cursor interaction classes */
-        .hover-target { display: inline-block; }
+        /* Animations */
+        .fade-up {
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-up.visible {
+            opacity: 1; transform: translateY(0);
+        }
     </style>
 </head>
 <body>
-    <div class="loader" id="loader">
-        <div class="loader-text"><span>INITIATING</span></div>
-    </div>
 
-    <div class="noise"></div>
-    <div class="grid-overlay"></div>
-
-    <div id="cursor"></div>
-    <div id="cursor-dot"></div>
-
-    <div class="arch-container">
-        <header>
-            <a href="index.html" class="logo hover-target">FIOZXR</a>
-            <nav>
-                <a href="projects.html" class="hover-target">Projects</a>
-                <a href="contact.html" class="hover-target">Contact</a>
-            </nav>
-        </header>
-
-        <section class="hero">
-            <h1 id="hero-title">
-                <span class="line"><span>SECURE</span></span>
-                <span class="line"><span style="color: var(--muted); font-style: italic;">SYSTEMS.</span></span>
-                <span class="line"><span>ARCHITECTURE.</span></span>
-            </h1>
-            <p class="hero-desc" id="hero-desc">
-                Cybersecurity student and developer focused on network security, penetration testing, and minimalist dark aesthetics. Exploring the unknown through structure.
-            </p>
-        </section>
-
-        <div class="marquee">
-            <div class="marquee-content">
-                ETHICAL HACKING /// WEB PENETRATION /// LINUX FUNDAMENTALS /// MALWARE ANALYSIS /// ETHICAL HACKING /// WEB PENETRATION /// LINUX FUNDAMENTALS /// MALWARE ANALYSIS ///
+    <nav>
+        <div class="container nav-content">
+            <a href="index.html" class="logo">FIOZXR</a>
+            <button class="mobile-toggle" id="mobile-toggle">☰</button>
+            <div class="nav-links" id="nav-links">
+                <a href="projects.html">Projects</a>
+                <a href="contact.html">Contact</a>
             </div>
         </div>
+    </nav>
 
-        <section class="section-grid">
-            <div class="grid-cell reveal">
-                <div class="cell-number">01</div>
-                <h3>Doctrine</h3>
-                <p>I explore the unknown. My focus lies in Ethical Hacking, Web Penetration, and Linux Fundamentals. I build tools that are not just functional, but adhere to a philosophy of privacy, performance, and aesthetic minimalism.</p>
-                <p>"Once open source, always open source." I believe in software that empowers the user without exploitation.</p>
+    <div class="container">
+        <section class="hero">
+            <div class="hero-content fade-up visible">
+                <span class="badge">Security Researcher</span>
+                <h1>Building the future of<br><span>Secure Systems.</span></h1>
+                <p>Cybersecurity student and developer focused on network security, penetration testing, and building resilient technical infrastructure.</p>
+                <a href="projects.html" class="btn-primary">View My Work</a>
             </div>
-            <div class="grid-cell reveal" style="transition-delay: 0.2s;">
-                <div class="cell-number">02</div>
-                <h3>Arsenal</h3>
-                <p>A curated collection of skills and methodologies deployed in the field of cybersecurity and system administration.</p>
-                <div class="tags">
-                    <span class="tag hover-target">Network Security</span>
-                    <span class="tag hover-target">Penetration Testing</span>
-                    <span class="tag hover-target">Linux Admin</span>
-                    <span class="tag hover-target">Python / Bash</span>
-                    <span class="tag hover-target">Android Dev</span>
-                    <span class="tag hover-target">Malware Analysis</span>
+        </section>
+
+        <section class="section-padding">
+            <h2 class="section-title fade-up">Core Competencies</h2>
+            <div class="grid-3">
+
+                <div class="feature-card fade-up">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Offensive Security</h3>
+                    <p>Exploring vulnerabilities through ethical hacking, web penetration testing, and identifying systemic weaknesses before they can be exploited.</p>
                 </div>
+
+                <div class="feature-card fade-up">
+                    <div class="feature-icon">💻</div>
+                    <h3>System Architecture</h3>
+                    <p>Deep understanding of Linux fundamentals, system administration, and building reliable, secure environments from the ground up.</p>
+                    <div class="tags">
+                        <span class="tag">Linux</span>
+                        <span class="tag">Bash</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+
+                <div class="feature-card fade-up">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Malware Analysis</h3>
+                    <p>Dissecting malicious software to understand attack vectors, evasion techniques, and developing robust countermeasures.</p>
+                </div>
+
             </div>
         </section>
 
         <footer>
-            <span>&copy; 2026 FIOZXR</span>
-            <span>SYSTEM_STATUS: ONLINE</span>
-            <span>NO RIGHTS RESERVED</span>
+            <p>&copy; 2026 FIOZXR. Professional Security Portfolio.</p>
         </footer>
     </div>
 
     <script>
-        // Custom Cursor
-        const cursor = document.getElementById('cursor');
-        const cursorDot = document.getElementById('cursor-dot');
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
+        // Mobile Menu
+        const toggle = document.getElementById('mobile-toggle');
+        const nav = document.getElementById('nav-links');
 
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            cursorDot.style.left = mouseX + 'px';
-            cursorDot.style.top = mouseY + 'px';
+        toggle.addEventListener('click', () => {
+            nav.classList.toggle('open');
+            toggle.textContent = nav.classList.contains('open') ? '✕' : '☰';
         });
 
-        // Smooth cursor follow
-        function animateCursor() {
-            let dx = mouseX - cursorX;
-            let dy = mouseY - cursorY;
-            cursorX += dx * 0.2;
-            cursorY += dy * 0.2;
-            cursor.style.left = cursorX + 'px';
-            cursor.style.top = cursorY + 'px';
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        // Cursor Hover Effects
-        const hoverTargets = document.querySelectorAll('.hover-target, a, .tag');
-        hoverTargets.forEach(target => {
-            target.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-            target.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
-
-        // Loader & Hero Animation
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hide');
-                setTimeout(() => {
-                    document.getElementById('hero-title').classList.add('visible');
-                    document.getElementById('hero-desc').classList.add('visible');
-                }, 500);
-            }, 1000);
-        });
-
-        // Scroll Reveal
-        const reveals = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
-                    entry.target.classList.add('active');
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 
-        reveals.forEach(reveal => revealObserver.observe(reveal));
+        document.querySelectorAll('.fade-up:not(.visible)').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
