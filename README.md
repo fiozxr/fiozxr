@@ -66,9 +66,9 @@ A Linux command-line security and encryption project.
 </tr>
 </table>More Projects
 
-- "Nyay" (https://github.com/fiozxr/nyay) — AI-focused project.
-- "FIOZXR's Lab" (https://github.com/fiozxr/fiozxrs-lab) — technical writing and engineering notes.
-- "All repositories" (https://github.com/fiozxr?tab=repositories)
+- [Nyay](https://github.com/fiozxr/nyay) — AI-focused project.
+- [FIOZXR's Lab](https://github.com/fiozxr/fiozxrs-lab) — technical writing and engineering notes.
+- [All repositories](https://github.com/fiozxr?tab=repositories)
 
 Tech Stack & Interests
 
