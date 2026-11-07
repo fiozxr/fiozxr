@@ -12,7 +12,9 @@ Building useful things at the intersection of software, AI, security, and system
   <a href="https://github.com/fiozxr?tab=repositories">
     <img src="https://img.shields.io/badge/Repositories-Explore-2D333B?style=for-the-badge&logo=github" alt="Repositories">
   </a>
-</p><img src="https://github.com/fiozxr.png" width="120" alt="FIOZXR GitHub avatar"></div>---
+</p><img src="https://github.com/fiozxr.png" width="120" alt="FIOZXR GitHub avatar"></div>
+
+---
 
 About
 
