@@ -12,7 +12,7 @@ Building useful things at the intersection of software, AI, security, and system
   <a href="https://github.com/fiozxr?tab=repositories">
     <img src="https://img.shields.io/badge/Repositories-Explore-2D333B?style=for-the-badge&logo=github" alt="Repositories">
   </a>
-</p><img src="https://raw.githubusercontent.com/fiozxr/fiozxr/main/docs/IMG_20261107_192303.png" width="350" alt="FIOZXR GitHub avatar"></div>---
+</p><img src="https://raw.githubusercontent.com/fiozxr/fiozxr/main/docs/IMG_20261107_192303.png" width="350" alt="FIOZXR profile image"></div>---
 
 About
 
@@ -29,10 +29,21 @@ I prefer building, testing, documenting, and improving real things over collecti
 
 Selected Projects
 
-- "PocketRouter" (https://github.com/fiozxr/PocketRouter) — Android networking toolkit for diagnostics and hotspot experiments.
-- "YourSQL" (https://github.com/fiozxr/YourSQL) — A local, browser-based SQLite workspace.
-- "TXT Vault" (https://github.com/fiozxr/txtvault) — A client-side encrypted text vault.
-- "CryXR" (https://github.com/fiozxr/CryXR) — A Linux command-line security and encryption project.
+"PocketRouter" (https://github.com/fiozxr/PocketRouter)
+
+Android networking toolkit for diagnostics and hotspot experiments.
+
+"YourSQL" (https://github.com/fiozxr/YourSQL)
+
+A local, browser-based SQLite workspace.
+
+"TXT Vault" (https://github.com/fiozxr/txtvault)
+
+A client-side encrypted text vault.
+
+"CryXR" (https://github.com/fiozxr/CryXR)
+
+A Linux command-line security and encryption project.
 
 More Projects
 
@@ -42,18 +53,11 @@ More Projects
 
 Tech Stack & Interests
 
-<div align="center"><img src="https://skillicons.dev/icons?i=linux,bash,python,js,ts,html,css,react,nextjs,kotlin,androidstudio,docker,git,github,supabase&perline=8" alt="Technology stack"></div>An evolving snapshot of technologies I work with and explore.
+<div align="center">
+  <img src="https://skillicons.dev/icons?i=linux,bash,python,js,ts,html,css,react,nextjs,kotlin,androidstudio,docker,git,github,supabase&perline=8" alt="Technology stack">
+</div>An evolving snapshot of technologies I work with and explore.
 
-GitHub Statistics
-
-<div align="center"><a href="https://github.com/fiozxr">
-  <img height="165" src="https://ghstats.dev/api/card?username=fiozxr&theme=dark&hide_border=true" alt="GitHub statistics">
-</a>
-<a href="https://github.com/fiozxr">
-  <img height="165" src="https://ghstats.dev/api/langs?username=fiozxr&theme=dark&layout=compact&max_langs=8&hide_border=true" alt="Most used languages">
-</a><br><a href="https://github.com/fiozxr">
-  <img src="https://ghstats.dev/api/sparkline?username=fiozxr&days=90&width=800&height=180&hide_border=true" alt="GitHub contribution history over the last 90 days">
-</a></div>FIOZXR's Lab
+FIOZXR's Lab
 
 I also maintain "FIOZXR's Lab" (https://github.com/fiozxr/fiozxrs-lab), an independent technical publication documenting experiments, systems, software, AI, security, hardware, and engineering.
 
